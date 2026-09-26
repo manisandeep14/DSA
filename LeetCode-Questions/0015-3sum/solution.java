@@ -4,7 +4,8 @@ class Solution {
         if(nums.length < 3)return list;
         Arrays.sort(nums);
         int i = 0,len = nums.length;
-        while(i < len-2 && nums[i] <= 0){
+        for(i = 0; i < len-2; i++){
+            if(i != 0 && nums[i] == nums[i-1])continue;
             int p1 = i + 1;
             int p2 = len - 1;
             while(p1 < p2){
@@ -16,18 +17,10 @@ class Solution {
                     list.add(new ArrayList<>(List.of(nums[i], nums[p1], nums[p2])));
                     p1++;
                     p2--;
-                    while (p1 < p2 && nums[p1] == nums[p1 - 1]) {
-                        p1++;
-                    }
-                    while (p1 < p2 && nums[p2] == nums[p2 + 1]) {
-                        p2--;
-                    }
+                    while (p1 < p2 && nums[p1] == nums[p1 - 1]) p1++;
+                    while (p1 < p2 && nums[p2] == nums[p2 + 1]) p2--;
                 }
             }
-            while (i < len - 1 && nums[i] == nums[i + 1]) {
-                i++;
-            }
-            i++;
             
         }
         return list;
